@@ -1,0 +1,41 @@
+1. What is the difference between MVC and ASP.NET?
+2. Why MVC?
+3. What are the ways in which the data gets transferred between
+view and Controller?
+4. Difference between Tempdata and ViewData and ViewBag?
+5. If hte data has to be travelled across controllers, which
+of the state management techniques helps?
+6. Different types of ActionResults?
+7. How are the validations getting implemented in Web API core?
+8. What are the HTTPVerbs used in Web API?
+9. What is postback or HTTPPost?
+10. What is a partial view?
+11. How are the themes maintained in MVC?
+12. Lifecycle of MVC?
+13. Lifecycle of Web API core project?
+14. Why Angular?
+15. What are services in Angular?
+16. Two Techniques to transfer data across components in Angular?
+17. How is two way binding implemented in Angular?
+18. How is property binding implemented in Angular?
+19. What are two types of forms used in Angular and difference between them?
+20. How are validations implemeted in Angular?
+21. Advantages of implementing validations in Angular/Client side 
+than Web API/Server side?
+22. How are filters implemented in Angular?
+23. What is async filter do in Angular?
+24. What is bootstrap and its advantages and what is RWD?
+25. How is web API invoked in Angular and what is the role of 
+http in the same?
+26. How are exceptions handled in Angular?
+27. How is unit testing implemented in Angular? - Karma
+28. How is end to end testing implemented in Angular - Protractor
+29. Difference between Interpolation and ngModel
+30. How is routing implemented in Angular?
+31. What is Dependency Injection and how it is implemeted in Angular?
+32. What is the purpose of using Package.json in Angular?
+33. What is SPA? 
+34. What does a subscribe method do in Angular?
+35. Differentiate between Observables and Promises.
+36. What is Authentication and Aurthorization in Angular?
+ 

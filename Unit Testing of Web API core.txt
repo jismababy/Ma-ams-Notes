@@ -1,0 +1,50 @@
+Unit Testing for Web API:
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
+
+Add another project to the same solution of the Web API
+In Package Manager 
+1.find and install Microsoft ASP.NET Web API 2 Core package.
+2. Install NUnit
+3. Install MVC core version 2.0
+4. Install EF core version 2.0
+5. Install SQL server core 2.0
+
+Include a dll reference of your Web API project in the Test Project 
+so that you can invoke the methods of the controllers.
+
+Add a new Unit test case
+and type the following code:
+
+using NUnit.Framework;
+using AdminMentorAPI.Controllers;
+using AdminMentorAPI.Models;
+using System.Collections.Generic;
+
+namespace Tests
+{
+    public class Tests
+    {
+        [SetUp]
+        public void Setup()
+        {
+        }
+        [Test]
+        public void GetAllSkillsCorrect()
+        {
+            //var testProducts = GetTestProducts();
+            var controller = new AdminController();
+
+            var result = controller.Get() as List<Skills>;
+            Assert.AreEqual(2, result.Count);
+        }
+        [Test]
+        public void GetAllSkillsIncorrect()
+        {
+            //var testProducts = GetTestProducts();
+            var controller = new AdminController();
+
+            var result = controller.Get() as List<Skills>;
+            Assert.AreEqual(6, result.Count);
+        }
+    }
+}

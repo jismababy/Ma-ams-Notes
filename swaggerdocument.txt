@@ -1,0 +1,27 @@
+Swagger Steps:
+
+PM console:
+
+1. Install-Package Swashbuckle.AspNetCore -Version 5.0.0-rc3
+
+2. Startup.cs
+
+Import the following namespace:
+using Microsoft.OpenApi.Models;
+
+3. ConfigureServices Method()
+{
+services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
+}
+
+4. Configure Method()
+{
+ app.UseSwagger();
+ app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+}

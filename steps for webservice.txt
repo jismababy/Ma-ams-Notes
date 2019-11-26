@@ -1,0 +1,13 @@
+1. Open vs 2017
+2. create a web application project
+3. Add a webservice (.asmx) 
+4. Add few webmethods 
+5. Run the service in IIS
+6. Copy the URL and let the webservice run in IIS. Do not stop the execution
+7. Create another web application project which is a client
+8. Add a new Webform
+9. Place a gridview in the form
+10.Add a service reference and go to advanced and then click on
+webservice reference and paste the URL which u copied.
+11.In the page load event, refer the namespace and create an object
+of the class and call the webmethod and populate the gridview.

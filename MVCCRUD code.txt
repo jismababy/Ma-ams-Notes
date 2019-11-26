@@ -1,0 +1,177 @@
+Controller code:
+using MVCStdApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MVCStdApp.Controllers
+{
+    public class EmployeeController : Controller
+    {
+       public static List<Blog> blogs = new List<Blog>();
+      // IBlog rep = new BlogRepository();
+      IBlog rep = new BlogDbRepository();
+        // GET: Employee
+        public ActionResult GetDetails()
+        {
+            #region
+            //Employee obj = new Employee();
+            //obj.Ename = "Radha";
+            //obj.Age = 22;
+            //obj.Eid = 1001;
+
+            //IEnumerable<perm> p = new List<perm>();
+            //IEnumerable<Employee> d = p;
+
+            //Employee e = new Employee();
+
+            //IEnumerable<Employee> emp = new List<Employee>();
+            //IEnumerable<perm> per =  emp;
+
+
+            #endregion
+            blogs = rep.getallblogs();
+             return View(blogs);
+        }
+
+        public ActionResult AddNewBlog()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddNewBlog(Blog obj)
+        {
+            rep.additem(obj);
+            return RedirectToAction("GetDetails");
+        }
+        
+        [HttpGet]
+        public ActionResult EditBlog(int id)
+        {
+           // blogs = rep.getallblogs();
+            Blog b = blogs.Find(e => e.BlogID == id);
+            return View(b);
+          }
+
+        [HttpPost]
+        public ActionResult EditBlog(Blog b)
+        {
+            rep.Updateitem(b);
+            return RedirectToAction("GetDetails");
+        }
+
+        public ActionResult RemoveBlog(int id)
+        {
+           blogs = rep.getallblogs();
+            Blog b = blogs.Find(e => e.BlogID == id);
+            rep.Removeitem(b);
+            return RedirectToAction("GetDetails");
+        }
+
+       
+    }
+}
+
+
+BlogDbRepository Code:
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Data.SqlClient;
+using System.Web;
+using System.Data;
+
+namespace MVCStdApp.Models
+{
+    public class BlogDbRepository : IBlog
+    {
+        public static SqlConnection con;
+        public static SqlCommand cmd;
+        public static List<Blog> bs = new List<Blog>();
+        public void additem(Blog b)
+        {
+            con = getcon();
+            int bid = b.BlogID;
+            string bname = b.BlogName;
+            DateTime dop = b.Dop;
+            cmd = new SqlCommand("insert into blog values(@bid,@bname,@dop)");
+            cmd.Connection = con;
+            cmd.Parameters.AddWithValue("@bid", bid);
+            cmd.Parameters.AddWithValue("@bname", bname);
+            cmd.Parameters.AddWithValue("@dop", dop);
+            int x=cmd.ExecuteNonQuery();
+            
+        }
+
+        public List<Blog> getallblogs()
+        {
+            con = getcon();
+            cmd = new SqlCommand("select * from blog");
+            cmd.Connection = con;
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            foreach (DataRow dr in dt.Rows)
+            {
+                Blog obj = new Blog();
+                obj.BlogID = Convert.ToInt32(dr.ItemArray[0]);
+                obj.BlogName = dr.ItemArray[1].ToString();
+                obj.Dop = Convert.ToDateTime(dr.ItemArray[2]);
+                bs.Add(obj);
+            }
+            return bs;
+        }
+
+        private static SqlConnection getcon()
+        {
+            SqlConnection con = new SqlConnection("Data Source=(local); Initial Catalog=library;Integrated Security=true");
+            con.Open();
+            return con;
+        }
+
+        public void Removeitem(Blog b)
+        {
+            con = getcon();
+            int bid = b.BlogID;
+            cmd = new SqlCommand("Delete from blog where BlogID=@bid");
+            cmd.Connection = con;
+            cmd.Parameters.AddWithValue("@bid", bid);
+            cmd.ExecuteNonQuery();
+        }
+    }
+}
+
+
+Enable-Migrations -ContextTypeName EmployeeContext
+Add-Migration EmployeeContext
+
+Configuration.cs
+Make your AutomaticEnableMigrations=true.
+
+update-database
+
+async and await
+
+
+Form Collection
+exception handling
+Master pages
+
+<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.0.0-msbuild3-final" PrivateAssets="All" />
+<DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" PrivateAssets="All" />
+
+Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Tools
+
+
+
+
+
+
+
+
+

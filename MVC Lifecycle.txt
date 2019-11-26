@@ -1,0 +1,40 @@
+MVC Life cycle:
+
+1.  Request for a View is sent by the browser and the URL pattern
+would be 
+http:\\localhost:56770\Controllername\actionmethodname
+
+2. URL is scanned for the controller name and actionmethod name 
+by the MVCRouteHandler and the controller name is passed to
+the Controller Factory
+
+3. The controller factory creates an instance of the controller 
+and passes the object to invoke the action method.
+
+4. The Actionmethod checks for the ActionFilter and after executing
+the action filters the result is passed to the ViewEngine.
+
+5. The ViewEngine scans the View and shares the response to the 
+browser.
+
+Passing Data from controller to view:
+1. ViewBag
+2. ViewData
+3. object
+4. TempData
+
+Passing Data from view to controller:
+1. object
+2. Formcollection
+
+
+
+
+
+
+
+
+
+
+
+
